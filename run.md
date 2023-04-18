@@ -1,6 +1,33 @@
+# 全量数据监控
+curl -s  http://127.0.0.1:9101 | python -m json.tool
+
+## 一个同步进度的展示
+curl -s http://127.0.0.1:9101/progress | python -m json.tool
+
+## conf表示的是配置文件信息
+curl -s http://127.0.0.1:9101/conf | python -m json.tool
+
 # 增量数据监控
+curl -s http://127.0.0.1:9100 | python -m json.tool
+
+## 复制的整体信息，主要包括目前同步的checkpoint位点。
+curl -s http://127.0.0.1:9100/repl | python -m json.tool
+
+## syncer内部的队列使用情况
+curl -s http://127.0.0.1:9100/queue | python -m json.tool
+
+## worker内部的使用情况
+curl -s http://127.0.0.1:9100/worker | python -m json.tool
+
+## executor
+curl -s http://127.0.0.1:9100/executor | python -m json.tool
+
+## sentinel展示当前的配置结果
+curl -s http://127.0.0.1:9100/sentinel | python -m json.tool
 
 mongoshake-stat --port=9100
+
+
 
 # 验证完整性
 
