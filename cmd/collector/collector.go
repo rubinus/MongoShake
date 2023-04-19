@@ -38,6 +38,7 @@ func main() {
 	tunnel := flag.String("tunnel", "", "tunnel")
 	sync_mode := flag.String("sync_mode", "", "sync_mode")
 	mongo_fetch_method := flag.String("mongo_fetch_method", "oplog", "mongo_fetch_method oplog or change_stream")
+	mongo_connect_mode := flag.String("mongo_connect_mode", "secondaryPreferred", "primary、secondaryPreferred、standalone")
 	filter_namespace_white := flag.String("filter_namespace_white", "", "filter_namespace_white")
 	filter_namespace_black := flag.String("filter_namespace_black", "", "filter_namespace_black")
 
@@ -89,6 +90,9 @@ func main() {
 	}
 	if *mongo_fetch_method != "" {
 		conf.Options.IncrSyncMongoFetchMethod = *mongo_fetch_method
+	}
+	if *mongo_connect_mode != "" {
+		conf.Options.MongoConnectMode = *mongo_connect_mode
 	}
 	if *filter_namespace_white != "" {
 		conf.Options.FilterNamespaceWhite = []string{
